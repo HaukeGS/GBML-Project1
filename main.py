@@ -454,12 +454,12 @@ def read_last_graph() -> dict:
         return relationships, initial_positions
 
 
-# relationships, initial_positions, G = sample_data.generate_graph_data(25)
-relationships, initial_positions = read_last_graph()
+relationships, initial_positions, G = sample_data.generate_graph_data(25)
+# relationships, initial_positions = read_last_graph()
 json_relationships = {" ".join(key): int(value) for key, value in relationships.items()}
 with open('last_graph.json', 'w') as file:
     json.dump({'relationships': json_relationships, 'initial_positions': initial_positions}, file)
 final_positions = optimize_relationships(relationships, initial_positions)
 
 check_constraints(relationships, final_positions, prints=True)
-draw_graph(relationships, final_positions, number_nodes_for_core_threshold=1)
+draw_graph(relationships, final_positions)
